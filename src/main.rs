@@ -3,14 +3,17 @@ use git2::{Cred, Config, RemoteCallbacks};
 use std::path::Path;
 
 fn main() {
+    let config = Config::open_default().unwrap();
+
     // Prepare callbacks.
     let mut callbacks = RemoteCallbacks::new();
-    callbacks.credentials(|url, _username_from_url, _allowed_types| {
-        Cred::credential_helper(
-            &Config::open_default()?,
-            url,
-            None,
-        )
+    callbacks.credentials(|_url, _username_from_url, _allowed_types| {
+        // Cred::credential_helper(
+        //    &config,
+        //    url,
+        //    None,
+        //)
+        Cred::ssh_key_from_agent("picklenerd")
     });
 
     // Prepare fetch options.
