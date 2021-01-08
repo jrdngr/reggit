@@ -1,5 +1,5 @@
-use git2::{Cred, Config, Error, RemoteCallbacks};
-use std::env;
+use git2::{Cred, Config, RemoteCallbacks};
+
 use std::path::Path;
 
 fn main() {
@@ -25,5 +25,5 @@ fn main() {
   builder.clone(
     "git@github.com:picklenerd/reggit.git",
     Path::new("./reggit"),
-  );
+  ).unwrap();
 }
